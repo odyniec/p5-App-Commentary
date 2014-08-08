@@ -7,5 +7,6 @@ use warnings;
 
 # VERSION
 
-1;
+use Dancer ':syntax';
 
+1;
