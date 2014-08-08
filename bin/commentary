@@ -1,0 +1,23 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+
+use Dancer ':syntax';
+use Getopt::Long;
+
+my %options = (
+    'sitedir' => '_site',
+);
+
+GetOptions(\%options,
+    'sitedir=s',
+);
+
+Dancer->import;
+
+set public => $options{sitedir};
+
+Dancer::load_app('App::Commentary');
+
+Dancer::dance();
