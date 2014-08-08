@@ -3,7 +3,7 @@ package App::Commentary;
 use strict;
 use warnings;
 
-# FIXME: Add ABSTRACT
+# ABSTRACT: Add comments to static websites
 
 # VERSION
 
