@@ -8,5 +8,6 @@ use warnings;
 # VERSION
 
 use Dancer ':syntax';
+use Dancer::Plugin::Commentary;
 
 1;
