@@ -5,19 +5,53 @@ use warnings;
 
 use Dancer ':syntax';
 use Getopt::Long;
+use YAML;
 
 my %options = (
-    'sitedir' => '_site',
+    'config'    => 'commentary.yml',
+    'sitedir'   => '_site',
 );
 
 GetOptions(\%options,
-    'sitedir=s',
+    'config|c=s',
+    'sitedir|s=s',
 );
+
+my $config;
+eval {
+    $config = YAML::LoadFile($options{config});
+    1;
+}
+or do {
+    print STDERR "Couldn't load configuration file '$options{config}'\n";
+    exit 1;
+};
+
+$ENV{DANCER_PUBLIC} = $options{sitedir};
 
 Dancer->import;
 
-set public => $options{sitedir};
+Dancer::Config->load;
 
-Dancer::load_app('App::Commentary');
+use Data::Dumper;
+print Dumper $config;
 
-Dancer::dance();
+if (exists $config->{auth}) {
+    config->{plugins}{Commentary}{auth} = {
+        %{ config->{plugins}{Commentary}{auth} || {} },
+        %{ $config->{auth} },
+    };
+}
+
+config->{plugins}{Commentary}{stylesheets} = [
+    '/app-commentary/assets/css/jekyll/jekyll.css'
+];
+
+# FIXME: Get rid of this
+Dancer::set logger => 'console';
+Dancer::set show_errors => 1;
+Dancer::set session => 'Simple';
+
+Dancer::load_app 'App::Commentary';
+
+Dancer::dance;
