@@ -16,4 +16,11 @@ get '/' => sub {
     forward '/index.html';
 };
 
+get '/app-commentary/assets/**' => sub {
+    my ($path) = splat;
+
+    return send_file(path(qw( .. App-Commentary share assets ), @$path),
+        system_path => 1);
+};
+
 1;
