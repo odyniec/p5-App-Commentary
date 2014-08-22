@@ -33,9 +33,6 @@ Dancer->import;
 
 Dancer::Config->load;
 
-use Data::Dumper;
-print Dumper $config;
-
 if (exists $config->{auth}) {
     # Pass auth configuration settings to Dancer::Plugin::Commentary
     config->{plugins}{Commentary}{auth} = {
