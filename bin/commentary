@@ -37,6 +37,7 @@ use Data::Dumper;
 print Dumper $config;
 
 if (exists $config->{auth}) {
+    # Pass auth configuration settings to Dancer::Plugin::Commentary
     config->{plugins}{Commentary}{auth} = {
         %{ config->{plugins}{Commentary}{auth} || {} },
         %{ $config->{auth} },
