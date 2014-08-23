@@ -17,6 +17,11 @@ GetOptions(\%options,
     'sitedir|s=s',
 );
 
+if (!-e $options{config}) {
+    print STDERR "Configuration file '$options{config}' not found\n";
+    exit 1;
+}
+
 my $config;
 eval {
     $config = YAML::LoadFile($options{config});
