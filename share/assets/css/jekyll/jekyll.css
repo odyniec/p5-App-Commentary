@@ -1,0 +1,184 @@
+.commentary-body {
+    margin: 0;
+}
+
+.commentary-comments,
+.commentary-comments * {
+    line-height: normal;
+    margin: 0;
+    padding: 0;
+}
+
+.commentary-comments {
+    border-top: 4px solid #eee;
+}
+
+.commentary-comments-header {
+    font-size: 115%;
+    font-weight: bold;
+    padding: 0.3em 0;
+}
+
+.commentary-comment {
+    min-height: 50px;
+    margin-bottom: 1em;
+}
+
+.commentary-comment:last-child {
+    margin-bottom: 0.2em;
+}
+
+.commentary-comment
+    .commentary-comment-author {
+        display: inline-block;
+        line-height: 1;
+        margin-bottom: 0.3em;
+    }
+
+.commentary-comment-author
+    .commentary-comment-author-avatar {
+        float: left;
+        height: 48px;
+        position: absolute;
+        width: 48px;
+    }
+
+.commentary-comment-author
+    .commentary-comment-author-name {
+        color: #777;
+        font-weight: 700;
+        line-height: auto;
+        margin-left: 56px;
+    }
+
+.commentary-comment-author
+    .commentary-comment-author-name
+        a {
+            color: #111;
+            text-decoration: none;
+        }
+
+.commentary-comment-author
+    .commentary-comment-author-auth-method {
+        color: #777;
+    }
+
+.commentary-comment
+    .commentary-comment-date {
+        color: #888;
+        display: inline;
+        font-size: 85%;
+        margin-left: 0.5em;
+    }
+
+.commentary-comment
+    .commentary-comment-body {
+        margin-left: 56px;
+        text-align: left;
+    }
+
+#commentary-new-comment {
+    margin: 0.5em auto 0.8em;
+}
+
+#commentary-new-comment
+    .commentary-comment-author {
+        display: auto;
+        line-height: 1;
+    }
+
+#commentary-new-comment
+    .commentary-comment-author {
+        margin-bottom: 0.4em;
+    }
+
+#commentary-new-comment
+    .commentary-comment-author-avatar {
+        float: left;
+        height: 48px;
+        position: absolute;
+        width: 48px;
+    }
+
+#commentary-new-comment
+    .commentary-comment-body {
+        margin-left: 56px;
+        text-align: left;
+    }
+
+#commentary-new-comment
+    .commentary-comment-body
+        textarea {
+            box-sizing: border-box;
+            font-family: inherit;
+            height: 4em;
+            padding: 0.4em;
+            width: 100%;
+        }
+
+#commentary-new-comment
+    .commentary-comment-author
+        .fa-user {
+            color: #888;
+            float: left;
+            font-size: 36px;
+            height: 48px;
+            line-height: 48px;
+            position: absolute;
+            text-align: center;
+            width: 48px;
+        }
+
+#commentary-new-comment
+    .commentary-comment-actions {
+        margin-top: 0.4em;
+        text-align: right;
+    }
+
+#commentary-new-comment
+    .commentary-comment-actions-submit {
+        color: #555;
+        font-weight: bolder;
+        padding: 0.2em 0.5em;
+    }
+
+#commentary-new-comment
+    .commentary-comment-actions-submit:disabled {
+        color: #999;
+    }
+
+#commentary-new-comment
+    .commentary-message {
+        border-radius: 0.3em;
+        border-style: solid;
+        border-width: 1px;
+        display: none;
+        margin-top: 0.3em;
+        padding: 0.5em 0.5em;
+    }
+
+.commentary-message-info {
+    background-color: #44bb44;
+    border-color: #22bb22;
+    color: #fff;
+}
+
+.commentary-message-error {
+    background-color: #bb4444;
+    border-color: #bb2222;
+    color: #fff;
+}
+
+#commentary-authentication
+    ul {
+        display: inline-block;
+        list-style-type: none;
+        margin-left: 0.3em;
+    }
+
+#commentary-authentication
+    ul
+        li {
+            display: inline-block;
+            margin-right: 0.5em;
+        }
