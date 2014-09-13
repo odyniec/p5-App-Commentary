@@ -23,4 +23,4 @@ get '/app-commentary/assets/**' => sub {
         system_path => 1);
 };
 
-1;
+true;
