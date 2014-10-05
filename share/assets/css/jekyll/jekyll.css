@@ -162,6 +162,18 @@
         padding: 0.5em 0.5em;
     }
 
+#commentary-new-comment-captcha:after { 
+   clear: both;
+   content: ".";
+   display: block;
+   height: 0;
+   visibility: hidden;
+}
+
+#commentary-new-comment-captcha > * {
+    float: right;
+}
+
 .commentary-message-info {
     background-color: #44bb44;
     border-color: #22bb22;
