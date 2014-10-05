@@ -101,6 +101,11 @@
     }
 
 #commentary-new-comment
+    input {
+        margin-left: 56px;
+    }
+
+#commentary-new-comment
     .commentary-comment-body {
         margin-left: 56px;
         text-align: left;
