@@ -100,10 +100,9 @@
         width: 48px;
     }
 
-#commentary-new-comment
-    input {
-        margin-left: 56px;
-    }
+input#commentary-new-comment-author-name {
+    margin-left: 56px;
+}
 
 #commentary-new-comment
     .commentary-comment-body {
