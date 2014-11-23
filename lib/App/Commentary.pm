@@ -9,6 +9,10 @@ use warnings;
 
 use Dancer ':syntax';
 use Dancer::Plugin::Commentary;
+use File::ShareDir;
+
+my $dist_dir = File::ShareDir::dist_dir('App-Commentary');
+my $assets_dir = path $dist_dir, 'assets';
 
 get '/' => sub {
     # TODO: We may want to make this configurable, in case some static site 
@@ -19,8 +23,7 @@ get '/' => sub {
 get '/app-commentary/assets/**' => sub {
     my ($path) = splat;
 
-    return send_file(path(qw( .. App-Commentary share assets ), @$path),
-        system_path => 1);
+    return send_file(path($assets_dir, @$path), system_path => 1);
 };
 
 true;
