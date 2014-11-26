@@ -3,17 +3,23 @@
 use strict;
 use warnings;
 
-use Dancer ':syntax';
 use Getopt::Long;
+use Plack::Loader;
 use YAML;
 
+require Dancer;
+
 my %options = (
-    'config'    => 'commentary.yml',
-    'sitedir'   => '_site',
+    config      => 'commentary.yml',
+    debug       => 0,
+    port        => 3000,
+    sitedir     => '_site',
 );
 
 GetOptions(\%options,
     'config|c=s',
+    'debug!',
+    'port=i',
     'sitedir|s=s',
 );
 
@@ -40,21 +46,45 @@ Dancer::Config->load;
 
 if (exists $config->{auth}) {
     # Pass auth configuration settings to Dancer::Plugin::Commentary
-    config->{plugins}{Commentary}{auth} = {
-        %{ config->{plugins}{Commentary}{auth} || {} },
+    Dancer::config()->{plugins}{Commentary}{auth} = {
+        %{ Dancer::config()->{plugins}{Commentary}{auth} || {} },
         %{ $config->{auth} },
     };
+
+    delete $config->{auth};
 }
 
-config->{plugins}{Commentary}{stylesheets} = [
+if (exists $config->{storage}) {
+    Dancer::config()->{plugins}{Commentary}{storage} = delete($config->{storage});
+    Dancer::config()->{plugins}{Commentary}{storage_options} =
+        delete($config->{storage_options});
+}
+
+do {
+    if (exists $config->{$_}) {
+        Dancer::config()->{plugins}{Commentary}{$_} =
+            delete($config->{$_});
+    }
+} for qw( akismet content_selector display_mode prefix recaptcha );
+
+Dancer::config()->{plugins}{Commentary}{stylesheets} = [
     '/app-commentary/assets/css/jekyll/jekyll.css'
 ];
 
-# FIXME: Get rid of this
-Dancer::set logger => 'console';
-Dancer::set show_errors => 1;
-Dancer::set session => 'Simple';
+# TODO: Pass any other configuration options to Dancer?
 
-Dancer::load_app 'App::Commentary';
+Dancer::set(charset => 'UTF-8');
 
-Dancer::dance;
+if ($options{debug}) {
+    Dancer::set(logger => 'console');
+    Dancer::set(show_errors => 1);
+    Dancer::set(session => 'Simple');
+    Dancer::load_app('App::Commentary');
+    Dancer::dance();
+}
+else {
+    # FIXME: Set session
+    Dancer::load_app('App::Commentary');
+    $ENV{PLACK_ENV} = 'PSGI';
+    Plack::Loader->load('Twiggy', port => $options{port})->run(Dancer::dance());
+}
